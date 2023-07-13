@@ -1,0 +1,23 @@
+<canvas id="ctx" width="500" height="500" style="border: 1px solid #000000"></canvas>
+
+<script
+  src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+  integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    const ctx = document.getElementById("ctx").getContext("2d");
+    ctx.font = '30px Arial';
+
+    const socket = io();
+
+    socket.on('newPositions', (data) => {
+        ctx.clearRect(0, 0, 500, 500);
+        for(let i = 0; i < data.length; i++){
+            ctx.fillText(data[i].number, data[i].x, data[i].y);
+        }
+    });
+
+</script>
+
